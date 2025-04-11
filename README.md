@@ -21,7 +21,7 @@ Siga os passos abaixo para configurar e executar o projeto em seu ambiente de de
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/desafio-green.git
+git clone https://github.com/LeiteGabriel/desafio-green.git
 cd desafio-green
 ```
 ### 2. Instalar as Dependências do Node.js
