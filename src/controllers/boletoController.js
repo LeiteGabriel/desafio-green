@@ -19,12 +19,11 @@ const importarCSV = async (req, res) => {
 				let boletoId = (await Boleto.count()) + 1;
 
 				for (const item of resultados) {
-					// Validação dos dados do CSV
+					console.log("Processando registro:", item);
 					if (
 						!item.unidade ||
 						!item.nome ||
-						!item.valor ||
-						!item.linha_digitavel
+						!item.valor 
 					) {
 						console.warn("Registro inválido encontrado e ignorado:", item);
 						continue;
@@ -67,10 +66,17 @@ const importarCSV = async (req, res) => {
 
 					// Verificar se o boleto já existe antes de criar
 					const boletoExistente = await Boleto.findOne({
-						where: { linha_digitavel: item.linha_digitavel },
+						where: {
+							nome_sacado: item.nome,
+							id_lote: lote.id,
+							valor: parseFloat(item.valor),
+							linha_digitavel: item.linha_digitavel,
+						},
 					});
 					if (boletoExistente) {
-						console.warn(`Boleto já existe: ${item.linha_digitavel}`);
+						console.warn(
+							`Boleto já existe com os mesmos dados: Nome: ${item.nome}, ID Lote: ${lote.id}, Valor: ${item.valor}, Linha Digitável: ${item.linha_digitavel}`
+						);
 						continue;
 					}
 					// Verificar se o valor é um número válido
