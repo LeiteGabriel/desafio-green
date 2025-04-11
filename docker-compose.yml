@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_green
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: green
+      POSTGRES_PASSWORD: green123
+      POSTGRES_DB: green_db
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+volumes:
+  pg_data:
